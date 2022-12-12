@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Loading } from "components/Loading/lazyload";
 import { EffectCallback, useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import "./style.css";
 
 interface IProps {
   image: string;
   alt?: string;
   height?: string;
   width?: string;
+  loading?: boolean;
 }
 
 const Image = (props: IProps) => {
-  const { image, alt, height, width } = props;
+  const { image, alt, height, width, loading } = props;
   const [isLoading, setIsLoading] = useState(true);
 
   const useEffectDidMount = (effect: EffectCallback) => {
@@ -26,24 +27,7 @@ const Image = (props: IProps) => {
 
   return (
     <div style={{ width: width, height: height }}>
-      {isLoading && (
-        <div className="flex items-center translate-x-[-25%] translate-y-[-25%] justify-center w-full h-full">
-          <div className="lds-spinner">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-      )}
+      {isLoading && loading && <Loading />}
       <LazyLoadImage
         alt={alt}
         height="100%"
@@ -60,6 +44,7 @@ Image.defaultProps = {
   height: "100%",
   width: "100%",
   alt: "",
+  loading: true,
 };
 
 export default Image;

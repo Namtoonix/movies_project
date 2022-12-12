@@ -11,8 +11,8 @@ function Main(props: IProps) {
   const { dataMovie } = props;
 
   return (
-    <div className="p-[10px]">
-      <Link to={`/${dataMovie.id}`}>
+    <div className="p-[10px] hover:opacity-70 duration-300">
+      <Link to={`/${dataMovie.id}/detail`}>
         <div className="rounded-[8px] overflow-hidden">
           <Image
             image={`${IMAGE_ORIGIN}${dataMovie.poster_path}`}
@@ -21,7 +21,9 @@ function Main(props: IProps) {
             height="220px"
           />
         </div>
-        <h2 className="font-[700] text-[16px]">{dataMovie.title}</h2>
+        <h2 className="font-[700] text-[16px] mt-[8px] leading-[1.4]">
+          {dataMovie.title}
+        </h2>
         <p className="text-[#00000099]">
           {moment(dataMovie.release_date).format("ll")}
         </p>

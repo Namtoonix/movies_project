@@ -5,6 +5,8 @@ import { ModelMovie } from "models/Movie";
 import { EffectCallback, useEffect } from "react";
 import Slider from "react-slick";
 import { ReactComponent as LeftArrow } from "assets/left-arrow.svg";
+import { Loading } from "components/Loading/lazyload";
+import { NoData } from "components/NoData/lazyload";
 
 interface IProps {
   type: Record<string, any>;
@@ -16,7 +18,7 @@ const classNameArrow =
 function Main(props: IProps) {
   const { type } = props;
   const { dispatch, actions, state } = useStore();
-  const { query, movies } = state;
+  const { query, movies, loading } = state;
   const { getList } = ModelMovie();
 
   const useEffectDidMount = (effect: EffectCallback) => {
@@ -61,8 +63,8 @@ function Main(props: IProps) {
 
   const settings: any = {
     speed: 500,
-    slidesToShow: 7,
-    slidesToScroll: 3,
+    slidesToShow: 6,
+    slidesToScroll: 2,
     lazyLoad: true,
     initialSlide: 7,
     draggable: false,
@@ -71,16 +73,20 @@ function Main(props: IProps) {
   };
 
   return (
-    movies?.length && (
-      <div className="mt-[20px]">
-        <h2 className="text-[24px] font-[600]">{type.title}</h2>
+    <div className="mt-[20px]">
+      <h2 className="text-[24px] font-[600]">{type.title}</h2>
+      {loading ? (
+        <Loading height="250px" />
+      ) : movies?.length ? (
         <Slider {...settings}>
           {movies.map((movie: Record<string, any>) => (
             <MovieItem dataMovie={movie} />
           ))}
         </Slider>
-      </div>
-    )
+      ) : (
+        <NoData />
+      )}
+    </div>
   );
 }
 
