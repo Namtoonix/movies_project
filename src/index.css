@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.slick-list {
+  overflow: hidden;
+}
+.slick-track {
+  transform: none;
+  display: flex;
+}

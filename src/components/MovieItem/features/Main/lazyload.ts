@@ -1,7 +1,7 @@
 import { LazyLoad } from "utils/Loadable";
 
-const MasterLayout = LazyLoad({
+const Main = LazyLoad({
   cb: () => import("./index"),
 });
 
-export { MasterLayout };
+export { Main };

@@ -1,5 +1,8 @@
-function Home() {
-  return <div>Home</div>;
-}
+import { MovieList } from "components/MovieList/lazyload";
+import { TYPES } from "./constants";
 
-export default Home;
+const Header = () => {
+  return TYPES.map((type) => <MovieList key={type.id} type={type} />);
+};
+
+export default Header;
