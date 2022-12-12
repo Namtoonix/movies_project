@@ -6,9 +6,14 @@
   font-family: "Source Sans Pro", sans-serif;
 }
 
+.slick-slider {
+  position: relative;
+}
+
 .slick-list {
   overflow: hidden;
 }
+
 .slick-track {
   transform: none;
   display: flex;
