@@ -34,17 +34,19 @@ function Main(props: IProps) {
     }
   };
 
-  const settings = {
+  const settings: any = {
     speed: 500,
     slidesToShow: 7,
     slidesToScroll: 3,
+    lazyLoad: true,
+    initialSlide: 7,
   };
 
   return (
     movies?.length && (
       <Slider {...settings}>
         {movies.map((movie: Record<string, any>) => (
-          <MovieItem data={movie} />
+          <MovieItem dataMovie={movie} />
         ))}
       </Slider>
     )

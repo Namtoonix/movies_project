@@ -1,18 +1,14 @@
-import {
-  GET_USER_DATA,
-  GET_USER_DATA_SUCCESS,
-  GET_USER_DATA_ERROR,
-} from "./constants";
+import { GET_IMAGE, GET_IMAGE_SUCCESS, GET_IMAGE_ERROR } from "./constants";
 
-export const getUserData = (payload: any) => ({
-  type: GET_USER_DATA,
+export const getImage = (payload: any) => ({
+  type: GET_IMAGE,
   payload,
 });
-export const getUserDataSuccess = (payload: any) => ({
-  type: GET_USER_DATA_SUCCESS,
+export const getImageSuccess = (payload: any) => ({
+  type: GET_IMAGE_SUCCESS,
   payload,
 });
-export const getUserDataError = (payload: any) => ({
-  type: GET_USER_DATA_ERROR,
+export const getImageError = (payload: any) => ({
+  type: GET_IMAGE_ERROR,
   payload,
 });

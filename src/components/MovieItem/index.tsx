@@ -2,14 +2,14 @@ import { MovieItemProvider } from "./context";
 import Main from "./features/Main";
 
 interface IProps {
-  data: Record<string, any>;
+  dataMovie: Record<string, any>;
 }
 
 function MovieItem(props: IProps) {
-  const { data } = props;
+  const { dataMovie } = props;
   return (
     <MovieItemProvider>
-      <Main data={data} />
+      <Main dataMovie={dataMovie} />
     </MovieItemProvider>
   );
 }

@@ -1,30 +1,26 @@
-import {
-  GET_USER_DATA,
-  GET_USER_DATA_SUCCESS,
-  GET_USER_DATA_ERROR,
-} from "./constants";
+import { GET_IMAGE, GET_IMAGE_SUCCESS, GET_IMAGE_ERROR } from "./constants";
 
 export const initialState = {
   error: "",
   loading: false,
-  userData: {},
+  image: "",
 };
 
 const reducer = (state: any, action: any) => {
   switch (action.type) {
-    case GET_USER_DATA:
+    case GET_IMAGE:
       return {
         ...state,
         loading: true,
         error: "",
       };
-    case GET_USER_DATA_SUCCESS:
+    case GET_IMAGE_SUCCESS:
       return {
         ...state,
         loading: false,
-        userData: action.payload,
+        image: action.payload,
       };
-    case GET_USER_DATA_ERROR:
+    case GET_IMAGE_ERROR:
       return {
         ...state,
         loading: false,
