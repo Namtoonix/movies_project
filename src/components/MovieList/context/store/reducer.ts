@@ -5,6 +5,7 @@ import {
   DEFAULT_PAGE,
   SET_TOTAL_PAGE,
   SET_QUERY,
+  RESET,
 } from "./constants";
 
 export const initialState = {
@@ -49,6 +50,9 @@ const reducer = (state: any, action: any) => {
         ...state,
         query: action.payload,
       };
+
+    case RESET:
+      return initialState;
     default:
       throw new Error("Action invalid");
   }

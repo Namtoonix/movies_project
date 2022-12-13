@@ -21,7 +21,7 @@ function Main(props: IProps) {
             height="220px"
           />
         </div>
-        <h2 className="font-[700] text-[16px] mt-[8px] leading-[1.4]">
+        <h2 className="font-[700] text-[16px] mt-[8px] leading-[1.4] text-ellipsis overflow-hidden w-full whitespace-nowrap">
           {dataMovie.title}
         </h2>
         <p className="text-[#00000099]">
