@@ -7,6 +7,7 @@ import { ModelMovie } from "models/Movie";
 import moment from "moment";
 import { IMAGE_ORIGIN } from "pages/Detail/constants";
 import { useStore } from "pages/Detail/context/store";
+import { GRID_VIEW } from "pages/Home/constants";
 import { EffectCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { formatNumber } from "utils/helper";
@@ -133,6 +134,9 @@ function Main() {
                 </div>
               )
             )}
+            <h3 className="text-[22px] font-[600] mt-[30px] text-white">
+              Recommendations
+            </h3>
             <MovieList
               id={detail.id}
               type={{
@@ -140,6 +144,7 @@ function Main() {
                 title: "Recommendations",
                 link: "/recommendations",
               }}
+              typeView={GRID_VIEW}
             />
           </>
         )
