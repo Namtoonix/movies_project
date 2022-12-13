@@ -16,7 +16,7 @@ interface IProps {
 }
 
 const classNameArrow =
-  "absolute top-[50%] w-[50px] h-[50px] translate-y-[-50%] z-[10]";
+  "absolute top-[50%] w-[50px] h-[50px] translate-y-[-50%] z-[10] rounded-full bg-white shadow-xl p-[8px] opacity-50 hover:opacity-100";
 
 const SLIDES_TO_SHOW = 6;
 const ROWS_TO_SHOW = 1;
@@ -52,7 +52,7 @@ function Main(props: IProps) {
   function SamplePrevArrow(props: any) {
     const { onClick } = props;
     return (
-      <div className={`left-[-60px] ${classNameArrow}`} onClick={onClick}>
+      <div className={`left-[12px] ${classNameArrow}`} onClick={onClick}>
         <LeftArrow />
       </div>
     );
@@ -62,7 +62,7 @@ function Main(props: IProps) {
     const { onClick } = props;
     return (
       <div
-        className={`right-[-60px] rotate-180 ${classNameArrow}`}
+        className={`right-[12px] rotate-180 ${classNameArrow}`}
         onClick={onClick}
       >
         <LeftArrow />
