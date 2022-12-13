@@ -138,7 +138,7 @@ function Main() {
             <MovieList
               id={detail.id}
               type={{
-                id: "recommendation",
+                id: "recommendations",
                 title: "Recommendations",
                 link: "/recommendations",
               }}
