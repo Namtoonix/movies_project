@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Image } from "components/Image/lazyload";
 import { Loading } from "components/Loading/lazyload";
 import { MovieList } from "components/MovieList/lazyload";
 import { Percent } from "components/Percent/lazyload";
@@ -63,32 +62,26 @@ function Main() {
   return (
     <>
       {loading ? (
-        <Loading height="500px" />
+        <Loading height="700px" />
       ) : (
         detail.id && (
           <>
-            <div className="flex items-center py-[30px] overflow-hidden">
-              <div className="absolute left-0 right-0 top-0 z-[1] overflow-hidden">
-                <Image
-                  loading={false}
-                  image={`${IMAGE_ORIGIN}/${detail.backdrop_path}`}
+            <div className="relative flex flex-wrap items-center overflow-hidden lg:bg-transparent lg:mx-0 mx-[-8px]">
+              <div className="relative">
+                <img
+                  width="100%"
+                  src={`${IMAGE_ORIGIN}/${detail.backdrop_path}`}
                   alt={detail.title}
-                  effect="opacity"
-                  height="574px"
                 />
-              </div>
-              <div className="absolute bg-[#00000090] left-0 right-0 top-0 z-[2] h-[574px]"></div>
-              <div className="w-1/4 rounded-[8px] overflow-hidden z-[2]">
-                <Image
-                  loading={false}
-                  image={`${IMAGE_ORIGIN}${detail.poster_path}`}
+                <img
+                  className="absolute h-[90%] top-[50%] translate-y-[-50%] z-[3] rounded-[8px] shadow-xl ml-[8px]"
+                  src={`${IMAGE_ORIGIN}${detail.poster_path}`}
                   alt={detail.title}
-                  effect="opacity"
-                  height="450px"
                 />
+                <div className="absolute bg-[#00000090] inset-0 z-[2]"></div>
               </div>
-              <div className="w-3/4 rounded-[8px] overflow-hidden z-[2] ml-[30px]">
-                <h2 className="text-[36px] font-[700] text-white">
+              <div className="lg:w-1/2 w-full lg:absolute relative z-[4] lg:top-[50%] lg:translate-y-[-50%] lg:left-[50%] lg:ml-auto px-[8px] lg:mt-0 mt-[20px] pb-[20px]">
+                <h2 className="lg:text-[36px] text-[18px] font-[700] text-white">
                   {detail.title}{" "}
                   <span className="opacity-80">
                     {`(${moment(detail.release_date).year()})`}
@@ -114,14 +107,19 @@ function Main() {
                 <p className="text-white text-[16px]">{detail.overview}</p>
               </div>
             </div>
-            <h3 className="text-[22px] font-[600] mt-[30px]">Videos</h3>
+            <h3 className="text-[22px] font-[600] mt-[30px] text-white">
+              Videos
+            </h3>
             {loadingVideo ? (
               <Loading height="500px" />
             ) : (
               videos.length && (
                 <div className="flex flex-wrap mx-[-12px]">
                   {videos.map((video: Record<string, any>) => (
-                    <div key={video.id} className="w-1/3 px-[12px] mt-[20px]">
+                    <div
+                      key={video.id}
+                      className="lg:w-1/3 sm:w-1/2 w-full px-[12px] mt-[20px]"
+                    >
                       <iframe
                         width="100%"
                         height="200px"
