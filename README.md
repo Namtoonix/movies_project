@@ -29,6 +29,9 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] Typescript
+- [x] PageSpeed Desktop 90+ points, Mobile 70+ points.
+      ![image](https://user-images.githubusercontent.com/89177123/207367913-16398835-ea6c-4cdd-835f-94196ca95404.png)
+      ![image](https://user-images.githubusercontent.com/89177123/207368039-51759f13-a61c-4635-ac1d-6e2727c734bc.png)
 - [x] Load more list of movies
 - [x] React slick slider
 
