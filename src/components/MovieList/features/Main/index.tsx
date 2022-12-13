@@ -28,7 +28,7 @@ function Main(props: IProps) {
   const { query, movies, loading, totalPage, error } = state;
   const { getList } = ModelMovie();
   const useEffectDidMount = (effect: EffectCallback) => {
-    useEffect(effect, [query]);
+    useEffect(effect, [query, type.id]);
   };
 
   useEffectDidMount(() => {
@@ -113,11 +113,8 @@ function Main(props: IProps) {
 
   return (
     <div className="relative mt-[20px]">
-      <h2 className="text-[24px] font-[600] absolute top-0 left-0 text-white">
-        {type.title}
-      </h2>
       {loading ? (
-        <Loading height="300px" />
+        <Loading height="340px" />
       ) : movies?.length ? (
         <PullToRefresh
           onRefresh={async () => {
@@ -125,13 +122,11 @@ function Main(props: IProps) {
             await apiFetchList();
           }}
         >
-          <div className="pt-[40px]">
-            <Slider {...settings}>
-              {movies.map((movie: Record<string, any>) => (
-                <MovieItem dataMovie={movie} />
-              ))}
-            </Slider>
-          </div>
+          <Slider {...settings}>
+            {movies.map((movie: Record<string, any>) => (
+              <MovieItem dataMovie={movie} />
+            ))}
+          </Slider>
         </PullToRefresh>
       ) : (
         <NoData />

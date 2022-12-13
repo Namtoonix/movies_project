@@ -17,12 +17,12 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Add a tab bar for **Now Playing** and **Top Rated** movies.
+- [x] Add a tab bar for **Now Playing** and **Top Rated** movies.
 - [ ] Implement segmented control to switch between list view and grid view.
 - [ ] Add a search bar.
-- [ ] All images fade in.
-- [ ] Implement lazy load image.
-- [ ] Customize the highlight and selection effect of the cell.
+- [x] All images fade in.
+- [x] Implement lazy load image.
+- [x] Customize the highlight and selection effect of the cell.
 - [ ] Improve UX loading by skeleton loading.
 - [ ] Enhance responsive.
 
