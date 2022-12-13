@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import { ReactComponent as LeftArrow } from "assets/left-arrow.svg";
 import { Loading } from "components/Loading/lazyload";
 import { NoData } from "components/NoData/lazyload";
+import { ToastMessage } from "components/ToastMessage/lazyload";
 
 interface IProps {
   type: Record<string, any>;
@@ -21,7 +22,7 @@ const SLIDES_TO_SHOW = 6;
 function Main(props: IProps) {
   const { type, id } = props;
   const { dispatch, actions, state } = useStore();
-  const { query, movies, loading, totalPage } = state;
+  const { query, movies, loading, totalPage, error } = state;
   const { getList } = ModelMovie();
 
   const useEffectDidMount = (effect: EffectCallback) => {
@@ -37,9 +38,8 @@ function Main(props: IProps) {
 
     const { data, isError } = await getList(type.id, query, id);
     if (isError) {
-      dispatch(actions.getMoviesListError(data || "Fetch error!"));
+      dispatch(actions.getMoviesListError(data.message || "Fetch error!"));
     } else {
-      console.log(data);
       dispatch(actions.getMoviesListSuccess([...movies, ...data.results]));
       if (totalPage === 0) {
         dispatch(actions.setTotalPage(data.total_pages));
@@ -104,6 +104,7 @@ function Main(props: IProps) {
       ) : (
         <NoData />
       )}
+      {error && <ToastMessage message={error} />}
     </div>
   );
 }
