@@ -4,6 +4,7 @@ import {
   GET_MOVIE_LIST_ERROR,
   SET_TOTAL_PAGE,
   SET_QUERY,
+  RESET,
 } from "./constants";
 
 export const getMoviesList = (payload: any) => ({
@@ -27,4 +28,8 @@ export const setQuery = (payload: any) => ({
 export const setTotalPage = (payload: any) => ({
   type: SET_TOTAL_PAGE,
   payload,
+});
+
+export const reset = (payload: any) => ({
+  type: RESET,
 });

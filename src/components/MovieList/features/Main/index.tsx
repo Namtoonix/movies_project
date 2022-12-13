@@ -8,6 +8,7 @@ import { ReactComponent as LeftArrow } from "assets/left-arrow.svg";
 import { Loading } from "components/Loading/lazyload";
 import { NoData } from "components/NoData/lazyload";
 import { ToastMessage } from "components/ToastMessage/lazyload";
+import PullToRefresh from "react-simple-pull-to-refresh";
 
 interface IProps {
   type: Record<string, any>;
@@ -15,9 +16,10 @@ interface IProps {
 }
 
 const classNameArrow =
-  "absolute top-[40%] w-[50px] h-[50px] translate-y-[-50%] z-[10]";
+  "absolute top-[50%] w-[50px] h-[50px] translate-y-[-50%] z-[10]";
 
 const SLIDES_TO_SHOW = 6;
+const ROWS_TO_SHOW = 1;
 
 function Main(props: IProps) {
   const { type, id } = props;
@@ -73,13 +75,18 @@ function Main(props: IProps) {
     infinite: false,
     slidesToShow: SLIDES_TO_SHOW,
     slidesToScroll: 2,
+    rows: ROWS_TO_SHOW,
     lazyLoad: true,
     draggable: false,
     initialSlide: Number(query.page - 1) * 20,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     afterChange: (index: number) => {
-      if (index === movies.length - SLIDES_TO_SHOW && query.page < totalPage) {
+      if (
+        index * ROWS_TO_SHOW ===
+          movies.length - SLIDES_TO_SHOW * ROWS_TO_SHOW &&
+        query.page < totalPage
+      ) {
         dispatch(
           actions.setQuery({
             ...query,
@@ -91,16 +98,27 @@ function Main(props: IProps) {
   };
 
   return (
-    <div className="mt-[20px]">
-      <h2 className="text-[24px] font-[600]">{type.title}</h2>
+    <div className="relative mt-[20px]">
+      <h2 className="text-[24px] font-[600] absolute top-0 left-0">
+        {type.title}
+      </h2>
       {loading ? (
         <Loading height="300px" />
       ) : movies?.length ? (
-        <Slider {...settings}>
-          {movies.map((movie: Record<string, any>) => (
-            <MovieItem dataMovie={movie} />
-          ))}
-        </Slider>
+        <PullToRefresh
+          onRefresh={async () => {
+            dispatch(actions.reset());
+            await apiFetchList();
+          }}
+        >
+          <div className="pt-[40px]">
+            <Slider {...settings}>
+              {movies.map((movie: Record<string, any>) => (
+                <MovieItem dataMovie={movie} />
+              ))}
+            </Slider>
+          </div>
+        </PullToRefresh>
       ) : (
         <NoData />
       )}
