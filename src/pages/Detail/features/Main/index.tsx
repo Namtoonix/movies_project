@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Image } from "components/Image/lazyload";
 import { Loading } from "components/Loading/lazyload";
-import { MovieItem } from "components/MovieItem/lazyload";
+import { MovieList } from "components/MovieList/lazyload";
 import { Percent } from "components/Percent/lazyload";
 import { ModelMovie } from "models/Movie";
 import moment from "moment";
@@ -9,20 +9,13 @@ import { IMAGE_ORIGIN } from "pages/Detail/constants";
 import { useStore } from "pages/Detail/context/store";
 import { EffectCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Slider from "react-slick";
-import { ReactComponent as LeftArrow } from "assets/left-arrow.svg";
-
-const classNameArrow =
-  "absolute top-[40%] w-[50px] h-[50px] translate-y-[-50%] z-[10]";
+import { formatNumber } from "utils/helper";
 
 function Main() {
   const { dispatch, actions, state } = useStore();
-  const { detail, loading, videos, loadingVideo, recommend, loadingRecommend } =
-    state;
-  const { getDetail, getVideo, getRecommend } = ModelMovie();
-
-  console.log(recommend);
-
+  const { detail, loading, videos, loadingVideo } = state;
+  const { getDetail, getVideo } = ModelMovie();
+  console.log(detail);
   const { id } = useParams();
 
   const useEffectDidMount = (effect: EffectCallback) => {
@@ -33,7 +26,6 @@ function Main() {
     if (id) {
       apiFetchDetail(id);
       apiFetchVideo(id);
-      apiFetchRecommend(id);
     }
   });
 
@@ -45,17 +37,6 @@ function Main() {
       dispatch(actions.getDetailError(data || "Fetch error!"));
     } else {
       dispatch(actions.getDetailSuccess(data));
-    }
-  };
-
-  const apiFetchRecommend = async (id: string) => {
-    dispatch(actions.getRecommend());
-
-    const { data, isError } = await getRecommend(id);
-    if (isError) {
-      dispatch(actions.getRecommendError(data || "Fetch error!"));
-    } else {
-      dispatch(actions.getRecommendSuccess(data.results));
     }
   };
 
@@ -77,38 +58,6 @@ function Main() {
         {index === genres.length - 1 ? "." : ", "}
       </span>
     ));
-  };
-
-  function SamplePrevArrow(props: any) {
-    const { onClick } = props;
-    return (
-      <div className={`left-[-60px] ${classNameArrow}`} onClick={onClick}>
-        <LeftArrow />
-      </div>
-    );
-  }
-
-  function SampleNextArrow(props: any) {
-    const { onClick } = props;
-    return (
-      <div
-        className={`right-[-60px] rotate-180 ${classNameArrow}`}
-        onClick={onClick}
-      >
-        <LeftArrow />
-      </div>
-    );
-  }
-
-  const settings: any = {
-    speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 2,
-    lazyLoad: true,
-    initialSlide: 7,
-    draggable: false,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
   };
 
   return loading ? (
@@ -151,6 +100,10 @@ function Main() {
               <span className="ml-[12px] text-white font-[700]">
                 User Score
               </span>
+
+              <span className="text-white ml-[12px] pl-[12px] border-l-[1px] border-l-[#0d243f]">{`Revenue: $${formatNumber(
+                detail.revenue
+              )}`}</span>
             </div>
             <p className="font-[400] opacity-70 text-white text-[18px] italic mt-[12px]">
               {detail.tagline}
@@ -180,18 +133,14 @@ function Main() {
             </div>
           )
         )}
-        <h3 className="text-[22px] font-[600] mt-[30px]">Recommendations</h3>
-        {loadingRecommend ? (
-          <Loading height="500px" />
-        ) : (
-          recommend.length && (
-            <Slider {...settings}>
-              {recommend.map((movie: Record<string, any>) => (
-                <MovieItem dataMovie={movie} />
-              ))}
-            </Slider>
-          )
-        )}
+        <MovieList
+          id={detail.id}
+          type={{
+            id: "recommendations",
+            title: "Recommendations",
+            link: "/recommendations",
+          }}
+        />
       </>
     )
   );

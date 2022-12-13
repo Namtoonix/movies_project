@@ -1,9 +1,9 @@
 export const TYPES = [
-  {
-    id: "latest",
-    title: "Latest",
-    link: "/latest",
-  },
+  // {
+  //   id: "latest",
+  //   title: "Latest",
+  //   link: "/latest",
+  // },
   {
     id: "now_playing",
     title: "Now Playing",

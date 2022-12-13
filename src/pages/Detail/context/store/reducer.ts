@@ -5,9 +5,6 @@ import {
   GET_VIDEO,
   GET_VIDEO_SUCCESS,
   GET_VIDEO_ERROR,
-  GET_RECOMMEND,
-  GET_RECOMMEND_SUCCESS,
-  GET_RECOMMEND_ERROR,
 } from "./constants";
 
 export const initialState = {
@@ -16,8 +13,6 @@ export const initialState = {
   detail: {},
   loadingVideo: false,
   videos: [],
-  loadingRecommend: false,
-  recommend: [],
 };
 
 const reducer = (state: any, action: any) => {
@@ -57,24 +52,6 @@ const reducer = (state: any, action: any) => {
       return {
         ...state,
         loadingVideo: false,
-        error: action.payload,
-      };
-    case GET_RECOMMEND:
-      return {
-        ...state,
-        loadingRecommend: true,
-        error: "",
-      };
-    case GET_RECOMMEND_SUCCESS:
-      return {
-        ...state,
-        loadingRecommend: false,
-        recommend: action.payload,
-      };
-    case GET_RECOMMEND_ERROR:
-      return {
-        ...state,
-        loadingRecommend: false,
         error: action.payload,
       };
     default:

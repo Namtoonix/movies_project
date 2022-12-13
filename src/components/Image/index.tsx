@@ -2,6 +2,7 @@
 import { Loading } from "components/Loading/lazyload";
 import { EffectCallback, useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import "./style.css";
 
 interface IProps {
   image: string;
@@ -22,20 +23,25 @@ const Image = (props: IProps) => {
   useEffectDidMount(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
   });
 
   return (
     <div style={{ width: width, height: height }}>
-      {isLoading && loading && <Loading />}
-      <LazyLoadImage
-        alt={alt}
-        height="100%"
-        width="100%"
-        src={image}
-        visibleByDefault={isLoading}
-        placeholderSrc="assets/error_image.png"
-      />
+      {isLoading && loading ? (
+        <Loading />
+      ) : (
+        <div className="fade-in-image">
+          <LazyLoadImage
+            alt={alt}
+            height="100%"
+            width="100%"
+            src={image}
+            visibleByDefault={isLoading}
+            placeholderSrc="assets/error_image.png"
+          />
+        </div>
+      )}
     </div>
   );
 };

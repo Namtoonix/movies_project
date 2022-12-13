@@ -3,6 +3,8 @@ import {
   GET_MOVIE_LIST_SUCCESS,
   GET_MOVIE_LIST_ERROR,
   DEFAULT_PAGE,
+  SET_TOTAL_PAGE,
+  SET_QUERY,
 } from "./constants";
 
 export const initialState = {
@@ -12,6 +14,7 @@ export const initialState = {
   query: {
     page: DEFAULT_PAGE,
   },
+  totalPage: 0,
 };
 
 const reducer = (state: any, action: any) => {
@@ -33,6 +36,18 @@ const reducer = (state: any, action: any) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+
+    case SET_TOTAL_PAGE:
+      return {
+        ...state,
+        totalPage: action.payload,
+      };
+
+    case SET_QUERY:
+      return {
+        ...state,
+        query: action.payload,
       };
     default:
       throw new Error("Action invalid");

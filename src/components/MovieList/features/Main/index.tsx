@@ -10,15 +10,18 @@ import { NoData } from "components/NoData/lazyload";
 
 interface IProps {
   type: Record<string, any>;
+  id: string;
 }
 
 const classNameArrow =
   "absolute top-[40%] w-[50px] h-[50px] translate-y-[-50%] z-[10]";
 
+const SLIDES_TO_SHOW = 6;
+
 function Main(props: IProps) {
-  const { type } = props;
+  const { type, id } = props;
   const { dispatch, actions, state } = useStore();
-  const { query, movies, loading } = state;
+  const { query, movies, loading, totalPage } = state;
   const { getList } = ModelMovie();
 
   const useEffectDidMount = (effect: EffectCallback) => {
@@ -32,11 +35,15 @@ function Main(props: IProps) {
   const apiFetchList = async () => {
     dispatch(actions.getMoviesList());
 
-    const { data, isError } = await getList(type.id, query);
+    const { data, isError } = await getList(type.id, query, id);
     if (isError) {
       dispatch(actions.getMoviesListError(data || "Fetch error!"));
     } else {
-      dispatch(actions.getMoviesListSuccess(data.results));
+      console.log(data);
+      dispatch(actions.getMoviesListSuccess([...movies, ...data.results]));
+      if (totalPage === 0) {
+        dispatch(actions.setTotalPage(data.total_pages));
+      }
     }
   };
 
@@ -63,20 +70,31 @@ function Main(props: IProps) {
 
   const settings: any = {
     speed: 500,
-    slidesToShow: 6,
+    infinite: false,
+    slidesToShow: SLIDES_TO_SHOW,
     slidesToScroll: 2,
     lazyLoad: true,
-    initialSlide: 7,
     draggable: false,
+    initialSlide: Number(query.page - 1) * 20,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    afterChange: (index: number) => {
+      if (index === movies.length - SLIDES_TO_SHOW && query.page < totalPage) {
+        dispatch(
+          actions.setQuery({
+            ...query,
+            page: query.page + 1,
+          })
+        );
+      }
+    },
   };
 
   return (
     <div className="mt-[20px]">
       <h2 className="text-[24px] font-[600]">{type.title}</h2>
       {loading ? (
-        <Loading height="250px" />
+        <Loading height="300px" />
       ) : movies?.length ? (
         <Slider {...settings}>
           {movies.map((movie: Record<string, any>) => (

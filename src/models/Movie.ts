@@ -5,7 +5,11 @@ const endpoint = `${API_URL}/movie`;
 const header = { "Content-Type": "application/json" };
 
 export const ModelMovie = () => {
-  const GetList = async (type: string, query: Record<string, string>) => {
+  const GetList = async (
+    type: string,
+    query: Record<string, string>,
+    id: any
+  ) => {
     const queryString = buildQueryString(
       {
         ...query,
@@ -15,10 +19,13 @@ export const ModelMovie = () => {
       []
     );
     try {
-      const response = await fetchJson(`${endpoint}/${type}${queryString}`, {
-        method: "GET",
-        headers: header,
-      });
+      const response = await fetchJson(
+        `${endpoint}/${id ? `${id}/` : ""}${type}${queryString}`,
+        {
+          method: "GET",
+          headers: header,
+        }
+      );
 
       return handleResponse(response);
     } catch (error) {
@@ -77,36 +84,9 @@ export const ModelMovie = () => {
     }
   };
 
-  const GetRecommend = async (id: string) => {
-    const queryString = buildQueryString(
-      {
-        api_key: API_KEY,
-        page: 1,
-      },
-      []
-    );
-    try {
-      const response = await fetchJson(
-        `${endpoint}/${id}/recommendations${queryString}`,
-        {
-          method: "GET",
-          headers: header,
-        }
-      );
-
-      return handleResponse(response);
-    } catch (error) {
-      return Promise.resolve({
-        data: error,
-        isError: true,
-      });
-    }
-  };
-
   return {
     getList: GetList,
     getDetail: GetDetail,
     getVideo: GetVideo,
-    getRecommend: GetRecommend,
   };
 };
