@@ -2,7 +2,7 @@
 
 **Movies** is a movies app using the [The Movie Database API](https://developers.themoviedb.org/3).
 
-Time spent: **HH** hours spent in total
+Time spent: **16** hours spent in total
 
 ## User Stories
 
@@ -28,7 +28,9 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] Typescript
+- [x] Load more list of movies
+- [x] React slick slider
 
 ## Video Walkthrough
 
@@ -38,7 +40,7 @@ Here's a walkthrough of implemented user stories:
 
 ## License
 
-    Copyright [2016] [your-name]
+    Copyright [2022] [Nam Vu]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

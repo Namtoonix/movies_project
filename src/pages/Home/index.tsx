@@ -15,7 +15,7 @@ const Header = () => {
           {TYPES.map((type) => (
             <li
               key={type.id}
-              className={`sm:text-[24px] text-[16px] font-[600] text-white sm:px-[20px] sm:py-[6px] px-[10px] py-[4px] hover:bg-white rounded-t-[8px] hover:text-[#0d243f] cursor-pointer ${
+              className={`sm:text-[20px] text-[16px] font-[600] text-white sm:px-[20px] sm:py-[6px] px-[10px] py-[4px] hover:bg-white rounded-t-[8px] hover:text-[#0d243f] cursor-pointer ${
                 tabActive.id === type.id ? "bg-white text-[#0d243f]" : ""
               }`}
               onClick={() => setTabActive(type)}

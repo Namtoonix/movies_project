@@ -5,6 +5,9 @@ import {
   GET_VIDEO,
   GET_VIDEO_SUCCESS,
   GET_VIDEO_ERROR,
+  SET_QUERY,
+  DEFAULT_PAGE,
+  SET_TOTAL_PAGE,
 } from "./constants";
 
 export const initialState = {
@@ -13,6 +16,10 @@ export const initialState = {
   detail: {},
   loadingVideo: false,
   videos: [],
+  query: {
+    page: DEFAULT_PAGE,
+  },
+  totalPage: 0,
 };
 
 const reducer = (state: any, action: any) => {
@@ -53,6 +60,17 @@ const reducer = (state: any, action: any) => {
         ...state,
         loadingVideo: false,
         error: action.payload,
+      };
+
+    case SET_QUERY:
+      return {
+        ...state,
+        query: action.payload,
+      };
+    case SET_TOTAL_PAGE:
+      return {
+        ...state,
+        totalPage: action.payload,
       };
     default:
       throw new Error("Action invalid");

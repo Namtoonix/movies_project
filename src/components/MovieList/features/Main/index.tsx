@@ -2,7 +2,7 @@
 import { MovieItem } from "components/MovieItem/lazyload";
 import { useStore } from "components/MovieList/context/store";
 import { ModelMovie } from "models/Movie";
-import { EffectCallback, useEffect } from "react";
+import { EffectCallback, useEffect, useState } from "react";
 import Slider from "react-slick";
 import { ReactComponent as LeftArrow } from "assets/left-arrow.svg";
 import starIcon from "assets/star_icon.png";
@@ -30,16 +30,20 @@ const ROWS_TO_SHOW = 2;
 function Main(props: IProps) {
   const { type, id, typeView } = props;
   const { dispatch, actions, state } = useStore();
+  const [imageUrlBase, setImageUrlBase] = useState(IMAGE_ORIGIN);
 
   const { query, movies, loading, totalPage, error } = state;
   const { getList } = ModelMovie();
 
-  const useEffectDidMount = (effect: EffectCallback) => {
+  const useEffectDidChangeQuery = (effect: EffectCallback) => {
     useEffect(effect, [query]);
   };
 
-  useEffectDidMount(() => {
+  useEffectDidChangeQuery(() => {
     apiFetchList();
+    setTimeout(() => {
+      setImageUrlBase(IMAGE_ORIGIN.replace("w200", "w500"));
+    }, 5000);
   });
 
   const useEffectDidChangeType = (effect: EffectCallback) => {
@@ -141,7 +145,7 @@ function Main(props: IProps) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative min-h-[600px]">
       {movies?.length ? (
         <PullToRefresh
           onRefresh={async () => {
@@ -172,7 +176,7 @@ function Main(props: IProps) {
                     <td>
                       <div className="flex justify-center py-[8px] ">
                         <Image
-                          image={`${IMAGE_ORIGIN}${movie.poster_path}`}
+                          image={`${imageUrlBase}${movie.poster_path}`}
                           alt={movie.title}
                           effect="opacity"
                           height="120px"
@@ -220,6 +224,7 @@ function Main(props: IProps) {
                         page: query.page + 1,
                       })
                     );
+                    setImageUrlBase(IMAGE_ORIGIN.replace("w500", "w200"));
                   }}
                 >
                   View more
