@@ -2,6 +2,7 @@
 import { Loading } from "components/Loading/lazyload";
 import { EffectCallback, useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import errorImage from "assets/error_image.png";
 import "./style.css";
 
 interface IProps {
@@ -38,7 +39,7 @@ const Image = (props: IProps) => {
             width="100%"
             src={image}
             visibleByDefault={isLoading}
-            placeholderSrc="assets/error_image.png"
+            placeholderSrc={errorImage}
           />
         </div>
       )}

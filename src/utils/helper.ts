@@ -115,3 +115,11 @@ export function useOutsideAlerter(ref: any, handle: Function) {
     };
   }, [ref]);
 }
+
+export const handleQueryString = (query: string) => {
+  return JSON.parse(
+    '{"' +
+      decodeURI(query.substring(1).replace(/&/g, '","').replace(/=/g, '":"')) +
+      '"}'
+  );
+};

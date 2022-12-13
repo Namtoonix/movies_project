@@ -158,18 +158,16 @@ function Main(props: IProps) {
             <>
               <table>
                 <tr className="border-b-[1px] border-b-[#ccc]">
-                  <th className="w-[15%]">Poster</th>
-                  <th className="w-[20%]">Name</th>
-                  <th className="w-[10%]">Released Date</th>
-                  <th className="w-[15%]">Vote Rate</th>
-                  <th className="w-[40%]">Overview</th>
+                  <th className="w-[15%] py-[8px]">Poster</th>
+                  <th className="w-[20%] py-[8px]">Name</th>
+                  <th className="w-[10%] py-[8px]">Released Date</th>
+                  <th className="w-[15%] py-[8px]">Vote Rate</th>
+                  <th className="w-[40%] py-[8px]">Overview</th>
                 </tr>
                 {movies.map((movie: Record<string, any>, index: number) => (
                   <tr
                     key={movie.id}
-                    className={`${
-                      index !== 0 ? "border-t-[1px] border-t-[#ccc]" : ""
-                    }`}
+                    className={`border-b-[1px] border-b-[#ccc]`}
                   >
                     <td>
                       <div className="flex justify-center py-[8px] ">
@@ -212,19 +210,21 @@ function Main(props: IProps) {
                   </tr>
                 ))}
               </table>
-              <p
-                className="text-center px-[12px] py-[6px] cursor-pointer text-[20px]"
-                onClick={() => {
-                  dispatch(
-                    actions.setQuery({
-                      ...query,
-                      page: query.page + 1,
-                    })
-                  );
-                }}
-              >
-                View more
-              </p>
+              <div className="flex justify-center my-[20px]">
+                <span
+                  className="cursor-pointer px-[12px] py-[6px] bg-[#fff] text-[#0d243f] hover:bg-[#0d243f] hover:text-[#fff] rounded-full"
+                  onClick={() => {
+                    dispatch(
+                      actions.setQuery({
+                        ...query,
+                        page: query.page + 1,
+                      })
+                    );
+                  }}
+                >
+                  View more
+                </span>
+              </div>
             </>
           )}
         </PullToRefresh>

@@ -3,6 +3,7 @@ import menuIcon from "assets/menu_icon.png";
 import { useRef, useState } from "react";
 import { useOutsideAlerter } from "utils/helper";
 import { Menu } from "../Menu/lazyload";
+import { SearchBar } from "../SearchBar/lazyload";
 
 function Main() {
   const [showMenu, setShowMenu] = useState(false);
@@ -28,7 +29,9 @@ function Main() {
         <div className="lg:w-3/6">
           <Menu showMenu={showMenu} />
         </div>
-        <div className="lg:w-2/6 lg:block hidden">Account</div>
+        <div className="lg:w-2/6 lg:block hidden">
+          <SearchBar />
+        </div>
       </div>
     </div>
   );
