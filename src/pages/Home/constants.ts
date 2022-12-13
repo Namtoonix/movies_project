@@ -25,3 +25,6 @@ export const TYPES = [
     link: "/upcoming",
   },
 ];
+
+export const GRID_VIEW = "grid";
+export const LIST_VIEW = "list";
