@@ -3,7 +3,7 @@ const GridIcon = ({ fill }: any) => {
     <svg
       viewBox="0 0 50 50"
       width="100%"
-      enable-background="new 0 0 50 50"
+      enableBackground="new 0 0 50 50"
       fill={fill}
     >
       <path

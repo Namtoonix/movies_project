@@ -5,6 +5,8 @@ import {
   GET_VIDEO,
   GET_VIDEO_SUCCESS,
   GET_VIDEO_ERROR,
+  SET_QUERY,
+  SET_TOTAL_PAGE,
 } from "./constants";
 
 export const getDetail = (payload: any) => ({
@@ -30,5 +32,15 @@ export const getVideoSuccess = (payload: any) => ({
 });
 export const getVideoError = (payload: any) => ({
   type: GET_VIDEO_ERROR,
+  payload,
+});
+
+export const setQuery = (payload: any) => ({
+  type: SET_QUERY,
+  payload,
+});
+
+export const setTotalPage = (payload: any) => ({
+  type: SET_TOTAL_PAGE,
   payload,
 });

@@ -9,7 +9,6 @@ import { ModelMovie } from "models/Movie";
 import { Loading } from "components/Loading/lazyload";
 import { ToastMessage } from "components/ToastMessage/lazyload";
 import { useStore } from "components/SearchItem/context/store";
-import errorImage from "assets/error_image.png";
 
 interface IProps {
   id: string;
@@ -54,11 +53,7 @@ function Main(props: IProps) {
               <div className="flex px-[20px] py-[8px]">
                 <div className="w-[15%]">
                   <Image
-                    image={
-                      detail.poster_path
-                        ? `${IMAGE_ORIGIN}${detail.poster_path}`
-                        : errorImage
-                    }
+                    image={`${IMAGE_ORIGIN}${detail.poster_path}`}
                     alt={detail.title}
                     effect="opacity"
                     height="120px"
