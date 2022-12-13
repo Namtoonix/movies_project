@@ -22,9 +22,9 @@ const SLIDES_TO_SHOW = 6;
 function Main(props: IProps) {
   const { type, id } = props;
   const { dispatch, actions, state } = useStore();
+
   const { query, movies, loading, totalPage, error } = state;
   const { getList } = ModelMovie();
-
   const useEffectDidMount = (effect: EffectCallback) => {
     useEffect(effect, [query]);
   };
