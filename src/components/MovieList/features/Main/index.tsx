@@ -16,7 +16,7 @@ interface IProps {
 }
 
 const classNameArrow =
-  "absolute top-[50%] w-[50px] h-[50px] translate-y-[-50%] z-[10] rounded-full bg-white shadow-xl p-[8px] opacity-50 hover:opacity-100";
+  "absolute top-[40%] w-[50px] h-[50px] translate-y-[-50%] z-[10] rounded-full bg-white shadow-xl p-[8px] opacity-50 hover:opacity-100";
 
 const SLIDES_TO_SHOW = 6;
 const ROWS_TO_SHOW = 1;
@@ -81,6 +81,20 @@ function Main(props: IProps) {
     initialSlide: Number(query.page - 1) * 20,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
     afterChange: (index: number) => {
       if (
         index * ROWS_TO_SHOW ===
@@ -99,7 +113,7 @@ function Main(props: IProps) {
 
   return (
     <div className="relative mt-[20px]">
-      <h2 className="text-[24px] font-[600] absolute top-0 left-0">
+      <h2 className="text-[24px] font-[600] absolute top-0 left-0 text-white">
         {type.title}
       </h2>
       {loading ? (

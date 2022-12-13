@@ -18,13 +18,13 @@ function Main(props: IProps) {
             image={`${IMAGE_ORIGIN}${dataMovie.poster_path}`}
             alt={dataMovie.title}
             effect="opacity"
-            height="220px"
+            height="270px"
           />
         </div>
         <h2 className="font-[700] text-[16px] mt-[8px] leading-[1.4] text-ellipsis overflow-hidden w-full whitespace-nowrap">
           {dataMovie.title}
         </h2>
-        <p className="text-[#00000099]">
+        <p className="text-[#eee]">
           {moment(dataMovie.release_date).format("ll")}
         </p>
       </Link>
