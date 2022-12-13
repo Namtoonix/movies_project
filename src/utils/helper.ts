@@ -1,6 +1,7 @@
 export const fetchJson = async (url: string, options: Record<string, any>) => {
   try {
     const response = await fetch(url, options);
+
     const data = response.json().catch(() => {
       return {}; // handle unexpected throw err when .json() fail
     });
@@ -9,11 +10,10 @@ export const fetchJson = async (url: string, options: Record<string, any>) => {
     }
     const error: any = new Error(response.statusText);
     error.response = response;
-    error.data = data;
     throw error;
   } catch (error: any) {
-    if (!error.data) {
-      error.data = { message: error.message };
+    if (error.response) {
+      return { success: false, message: error.response.statusText };
     }
     throw error;
   }
@@ -58,7 +58,7 @@ export function buildQueryString(
 export const handleResponse = (response: any) => {
   if (response.success === false) {
     return Promise.resolve({
-      data: response.status_message,
+      data: response,
       isError: true,
     });
   } else {
