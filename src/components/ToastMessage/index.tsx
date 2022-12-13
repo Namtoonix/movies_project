@@ -10,7 +10,6 @@ interface IProps {
 
 const ToastMessage = (props: IProps) => {
   const { message, type } = props;
-  console.log(props);
 
   const useEffectDidUpdate = (effect: EffectCallback) => {
     useEffect(effect, [message]);
@@ -18,7 +17,6 @@ const ToastMessage = (props: IProps) => {
 
   useEffectDidUpdate(() => {
     if (message) {
-      console.log(message);
       toast.error(message, {
         position: "bottom-center",
         autoClose: 5000,

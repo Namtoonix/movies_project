@@ -1,7 +1,7 @@
 import { LazyLoad } from "utils/Loadable";
 
-const Account = LazyLoad({
+const SearchBar = LazyLoad({
   cb: () => import("./index"),
 });
 
-export { Account };
+export { SearchBar };

@@ -92,7 +92,9 @@ function Main() {
                   {renderGenres(detail.genres)}
                 </p>
                 <div className="flex items-center">
-                  <Percent percent={Number(detail.vote_average) * 10} />
+                  <Percent
+                    percent={Math.round(Number(detail.vote_average) * 10)}
+                  />
                   <span className="ml-[12px] text-white font-[700]">
                     User Score
                   </span>
