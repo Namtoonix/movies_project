@@ -29,6 +29,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] Typescript
+- [x] Resize image after load success.
 - [x] PageSpeed Desktop 90+ points, Mobile 70+ points.
       ![image](https://user-images.githubusercontent.com/89177123/207367913-16398835-ea6c-4cdd-835f-94196ca95404.png)
       ![image](https://user-images.githubusercontent.com/89177123/207368039-51759f13-a61c-4635-ac1d-6e2727c734bc.png)
@@ -39,8 +40,8 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-> Please record screen to a GIF file and attach link here
-
+> Link GIF record screen (There are some videos lost because of not enough memory): 
+[File GIF record screen](https://drive.google.com/file/d/1JlT45GYGx-2S49fV462TzqolDNGPI3Xv/view?usp=sharing).
 ## License
 
     Copyright [2022] [Nam Vu]
